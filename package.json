@@ -1,5 +1,5 @@
 {
-	"name": "auto-auto-fold-imports",
+	"name": "auto-fold-imports",
 	"publisher": "eramdam",
 	"displayName": "Auto Fold Imports",
 	"description": "Automatically fold imports in JS(X)/TS(X) files!",
