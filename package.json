@@ -1,8 +1,8 @@
 {
-	"name": "fold-imports",
+	"name": "auto-auto-fold-imports",
 	"publisher": "eramdam",
-	"displayName": "Fold Imports",
-	"description": "",
+	"displayName": "Auto Fold Imports",
+	"description": "Automatically fold imports in JS(X)/TS(X) files!",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.44.0"
@@ -16,19 +16,19 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "Fold Imports",
+			"title": "Auto Fold Imports",
 			"properties": {
-				"fold-imports.minimumBlockSize": {
+				"auto-fold-imports.minimumBlockSize": {
 					"type": "integer",
 					"default": "2",
 					"description": "How long the import block needs to be before auto-folding kicks in"
 				},
-				"fold-imports.debug": {
+				"auto-fold-imports.debug": {
 					"type": "boolean",
 					"default": false,
 					"description": "Print debug statements"
 				},
-				"fold-imports.extraLanguages": {
+				"auto-fold-imports.extraLanguages": {
 					"type": "array",
 					"scope": "application",
 					"default": [],

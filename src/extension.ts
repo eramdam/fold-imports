@@ -6,9 +6,10 @@ const eolToString: { [k in vscode.EndOfLine]: string } = {
   [vscode.EndOfLine.CRLF]: '\r\n',
   [vscode.EndOfLine.LF]: '\n',
 };
+const extensionKey = 'auto-fold-imports';
 
 export function activate() {
-  const configuration = vscode.workspace.getConfiguration('fold-imports');
+  const configuration = vscode.workspace.getConfiguration(extensionKey);
   const importsLanguages: string[] = [
     'typescriptreact',
     'typescript',
