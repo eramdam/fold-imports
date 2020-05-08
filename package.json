@@ -13,6 +13,10 @@
 	"activationEvents": [
 		"*"
 	],
+	"repository": {
+		"url": "https://github.com/eramdam/fold-imports",
+		"type": "git"
+	},
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
