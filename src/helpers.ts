@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 const importsRE = new RegExp('^import', 'gm');
 const extensionKey = 'auto-fold-imports';
 
-export interface FoldLineProps {
+export interface ImportsBlock {
   start: number;
   size: number;
 }
@@ -38,25 +38,31 @@ export function getRegexpMatches(regexp: RegExp, text: string) {
   return results;
 }
 
+/** Logs to the console if debug mode is enabled. */
 export const logger = (...args: any[]) => {
   if (configuration.debug) {
     console.log(...args);
   }
 };
 
-export function findImportLines(
+/** Finds the import block in the document. */
+export function findImportsBlock(
   document: vscode.TextDocument
-): FoldLineProps | undefined {
+): ImportsBlock | undefined {
+  // If the document doesn't have the languages we set up, nothing to do.
   if (!importsLanguages.includes(document.languageId)) {
     return undefined;
   }
 
+  // Get the text of the document.
   const text = document.getText();
+  // Find regex matches/
   const matches = getRegexpMatches(importsRE, text);
   if (matches.length < 1) {
     return undefined;
   }
 
+  // Find the first and the last line of imports.
   const firstLine = matches[0].index;
   const lastLine = matches[matches.length - 1].index;
 
@@ -68,29 +74,30 @@ export function findImportLines(
 
 export function changeFoldingOfImportLines(
   action: FoldActions,
-  lines: FoldLineProps
+  block: ImportsBlock
 ) {
   const command = action === FoldActions.FOLD ? 'editor.fold' : 'editor.unfold';
-  logger(`Running ${command} at line ${lines.start}`);
+  logger(`Running ${command} at line ${block.start}`);
   // Change folding at the line number.
   vscode.commands.executeCommand(command, {
     levels: 1,
-    selectionLines: [lines.start],
+    selectionLines: [block.start],
   });
 }
 
-export function shouldFoldImports(lines: FoldLineProps | undefined) {
-  if (!lines) {
+export function shouldFoldImports(block: ImportsBlock | undefined) {
+  // If we have no lines, nothing to do.
+  if (!block) {
     return false;
   }
 
   // If there is no import statement, nothing to do.
-  if (lines.start === -1) {
+  if (block.start === -1) {
     return false;
   }
 
   // If the import block is smaller than the defined minimum size, nothing to do.
-  if (lines.size < minimumBlockSize) {
+  if (block.size < minimumBlockSize) {
     return false;
   }
 

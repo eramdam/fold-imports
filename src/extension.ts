@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import {
   changeFoldingOfImportLines,
-  findImportLines,
+  findImportsBlock,
   FoldActions,
   shouldFoldImports,
 } from './helpers';
@@ -10,36 +10,43 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   const foldCommandDisposable = vscode.commands.registerCommand(
     'auto-fold-imports.fold',
     () => {
+      // No text editor? Nothing to do.
       if (!vscode.window.activeTextEditor) {
         return;
       }
 
       const { document } = vscode.window.activeTextEditor;
-      const importLines = findImportLines(document);
+      // Find the imports block.
+      const importBlock = findImportsBlock(document);
 
-      if (!importLines) {
+      if (!importBlock) {
         return;
       }
 
-      changeFoldingOfImportLines(FoldActions.FOLD, importLines);
+      // Trigger folding command.
+      changeFoldingOfImportLines(FoldActions.FOLD, importBlock);
     }
   );
 
   const unfoldCommandDisposable = vscode.commands.registerCommand(
     'auto-fold-imports.unfold',
     () => {
+      // No text editor? Nothing to do.
       if (!vscode.window.activeTextEditor) {
         return;
       }
 
       const { document } = vscode.window.activeTextEditor;
-      const importLines = findImportLines(document);
+      // Find the imports block.
+      const importBlock = findImportsBlock(document);
 
-      if (!importLines) {
+      // No import block? Nothing to do.
+      if (!importBlock) {
         return;
       }
 
-      changeFoldingOfImportLines(FoldActions.UNFOLD, importLines);
+      // Trigger folding command.
+      changeFoldingOfImportLines(FoldActions.UNFOLD, importBlock);
     }
   );
 
@@ -47,12 +54,13 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   extensionContext.subscriptions.push(unfoldCommandDisposable);
 
   vscode.workspace.onDidOpenTextDocument((document) => {
-    const importLines = findImportLines(document);
+    const importsBlock = findImportsBlock(document);
 
-    if (!importLines || !shouldFoldImports(importLines)) {
+    if (!importsBlock || !shouldFoldImports(importsBlock)) {
       return;
     }
-    changeFoldingOfImportLines(FoldActions.FOLD, importLines);
+
+    changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
   });
 }
 
