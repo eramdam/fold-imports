@@ -19,6 +19,16 @@
 	},
 	"main": "./out/extension.js",
 	"contributes": {
+		"commands": [
+			{
+				"command": "auto-fold-imports.fold",
+				"title": "Fold imports of current file"
+			},
+			{
+				"command": "auto-fold-imports.unfold",
+				"title": "Unfold imports of current file"
+			}
+		],
 		"configuration": {
 			"title": "Auto Fold Imports",
 			"properties": {
