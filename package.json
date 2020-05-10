@@ -1,6 +1,6 @@
 {
 	"name": "auto-fold-imports",
-	"publisher": "eramdam",
+	"publisher": "Damien Erambert",
 	"displayName": "Auto Fold Imports",
 	"description": "Automatically fold imports in JS(X)/TS(X) files!",
 	"version": "0.0.1",
