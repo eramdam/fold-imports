@@ -1,4 +1,4 @@
-# Auto Fold Imports
+# Fold Imports
 
 Like the name implies, this extension automatically folds the ES6 imports of JavaScript and TypeScript files.
 
