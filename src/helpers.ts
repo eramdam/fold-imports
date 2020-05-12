@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 const importsRE = new RegExp('^import', 'gm');
-const extensionKey = 'auto-fold-imports';
+export const extensionKey = 'fold-imports';
 
 export interface ImportsBlock {
   start: number;
@@ -13,15 +13,15 @@ export enum FoldActions {
   UNFOLD = 2,
 }
 
-const configuration = vscode.workspace.getConfiguration(extensionKey);
-const importsLanguages: string[] = [
+const getConfiguration = () =>
+  vscode.workspace.getConfiguration(extensionKey) || {};
+const getImportLanguages = () => [
   'typescriptreact',
   'typescript',
   'javascript',
   'javascriptreact',
-  ...(configuration.extraLanguages || []),
+  ...(getConfiguration().extraLanguages || []),
 ];
-const { minimumBlockSize } = configuration;
 
 /** Returns an array of regexp matches even if the regex has the `g` flag */
 export function getRegexpMatches(regexp: RegExp, text: string) {
@@ -40,7 +40,7 @@ export function getRegexpMatches(regexp: RegExp, text: string) {
 
 /** Logs to the console if debug mode is enabled. */
 export const logger = (...args: any[]) => {
-  if (configuration.debug) {
+  if (getConfiguration().debug) {
     console.log(...args);
   }
 };
@@ -50,7 +50,7 @@ export function findImportsBlock(
   document: vscode.TextDocument
 ): ImportsBlock | undefined {
   // If the document doesn't have the languages we set up, nothing to do.
-  if (!importsLanguages.includes(document.languageId)) {
+  if (!getImportLanguages().includes(document.languageId)) {
     return undefined;
   }
 
@@ -85,7 +85,12 @@ export function changeFoldingOfImportLines(
   });
 }
 
-export function shouldFoldImports(block: ImportsBlock | undefined) {
+export function shouldAutoFoldImports(block: ImportsBlock | undefined) {
+  // If we don't want to automatically fold imports, nothing to do.
+  if (!getConfiguration().auto) {
+    return false;
+  }
+
   // If we have no lines, nothing to do.
   if (!block) {
     return false;
@@ -97,7 +102,7 @@ export function shouldFoldImports(block: ImportsBlock | undefined) {
   }
 
   // If the import block is smaller than the defined minimum size, nothing to do.
-  if (block.size < minimumBlockSize) {
+  if (block.size < getConfiguration().minimumBlockSize) {
     return false;
   }
 

@@ -3,12 +3,13 @@ import {
   changeFoldingOfImportLines,
   findImportsBlock,
   FoldActions,
-  shouldFoldImports,
+  shouldAutoFoldImports,
+  extensionKey,
 } from './helpers';
 
 export function activate(extensionContext: vscode.ExtensionContext) {
   const foldCommandDisposable = vscode.commands.registerCommand(
-    'auto-fold-imports.fold',
+    extensionKey + '.fold',
     () => {
       // No text editor? Nothing to do.
       if (!vscode.window.activeTextEditor) {
@@ -29,7 +30,7 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   );
 
   const unfoldCommandDisposable = vscode.commands.registerCommand(
-    'auto-fold-imports.unfold',
+    extensionKey + '.unfold',
     () => {
       // No text editor? Nothing to do.
       if (!vscode.window.activeTextEditor) {
@@ -56,7 +57,7 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   vscode.workspace.onDidOpenTextDocument((document) => {
     const importsBlock = findImportsBlock(document);
 
-    if (!importsBlock || !shouldFoldImports(importsBlock)) {
+    if (!importsBlock || !shouldAutoFoldImports(importsBlock)) {
       return;
     }
 

@@ -1,7 +1,7 @@
 {
-	"name": "auto-fold-imports",
+	"name": "fold-imports",
 	"publisher": "eramdam",
-	"displayName": "Auto Fold Imports",
+	"displayName": "Fold Imports",
 	"description": "Automatically fold imports in JS(X)/TS(X) files!",
 	"version": "0.0.1",
 	"engines": {
@@ -21,28 +21,33 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "auto-fold-imports.fold",
+				"command": "fold-imports.fold",
 				"title": "Fold imports of current file"
 			},
 			{
-				"command": "auto-fold-imports.unfold",
+				"command": "fold-imports.unfold",
 				"title": "Unfold imports of current file"
 			}
 		],
 		"configuration": {
-			"title": "Auto Fold Imports",
+			"title": "Fold Imports",
 			"properties": {
-				"auto-fold-imports.minimumBlockSize": {
+				"fold-imports.minimumBlockSize": {
 					"type": "integer",
 					"default": "2",
 					"description": "How long the import block needs to be before auto-folding kicks in"
 				},
-				"auto-fold-imports.debug": {
+				"fold-imports.debug": {
 					"type": "boolean",
 					"default": false,
 					"description": "Print debug statements"
 				},
-				"auto-fold-imports.extraLanguages": {
+				"fold-imports.auto": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether or not to automatically fold imports"
+				},
+				"fold-imports.extraLanguages": {
 					"type": "array",
 					"scope": "application",
 					"default": [],
