@@ -21,3 +21,5 @@ This extension contributes the following settings:
 - `auto-fold-imports.extraLanguages`: Extra languages in which to auto folds.
 
 ## Release Notes
+
+See the [changelog](CHANGELOG.md)

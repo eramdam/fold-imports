@@ -3,7 +3,7 @@
 	"publisher": "eramdam",
 	"displayName": "Fold Imports",
 	"description": "Automatically fold imports in JS(X)/TS(X) files!",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
