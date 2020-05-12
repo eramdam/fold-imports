@@ -4,6 +4,12 @@ Like the name implies, this extension automatically folds the ES6 imports of Jav
 
 ![](https://raw.githubusercontent.com/eramdam/fold-imports/master/demo.gif?token=AAKYHBHC6TZTQ34PLWV4EOK6YNQFA)
 
+## Installation
+
+Grab the extension on the Marketplace!
+
+https://marketplace.visualstudio.com/items?itemName=eramdam.fold-imports
+
 ## Features
 
 - Automatically folds ES6 imports in JavaScript and TypeScript files
