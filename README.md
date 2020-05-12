@@ -2,6 +2,8 @@
 
 Like the name implies, this extension automatically folds the ES6 imports of JavaScript and TypeScript files.
 
+![](demo.gif)
+
 ## Features
 
 - Automatically folds ES6 imports in JavaScript and TypeScript files
@@ -10,10 +12,6 @@ Like the name implies, this extension automatically folds the ES6 imports of Jav
   - `auto-fold-imports.unfold`
 
 ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
 
 This extension contributes the following settings:
 
