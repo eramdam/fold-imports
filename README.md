@@ -2,7 +2,7 @@
 
 Like the name implies, this extension automatically folds the ES6 imports of JavaScript and TypeScript files.
 
-![](demo.gif)
+![](https://raw.githubusercontent.com/eramdam/fold-imports/master/demo.gif?token=AAKYHBHC6TZTQ34PLWV4EOK6YNQFA)
 
 ## Features
 
