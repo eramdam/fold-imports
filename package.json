@@ -7,9 +7,16 @@
 	"engines": {
 		"vscode": "^1.44.0"
 	},
+	"license": "SEE LICENSE IN LICENSE.md",
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"folding",
+		"imports",
+		"es imports"
+	],
+	"preview": true,
 	"activationEvents": [
 		"*"
 	],
