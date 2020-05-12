@@ -17,10 +17,9 @@ For example:
 
 This extension contributes the following settings:
 
-- `auto-fold-imports.debug`: Print debug statements.
+- `auto-fold-imports.auto`: Controls the automatic folding of imports.
+- `auto-fold-imports.debug`: Whether to print debug statements or not.
 - `auto-fold-imports.minimumBlockSize`: How big an imports block needs to be before it's auto folded.
 - `auto-fold-imports.extraLanguages`: Extra languages in which to auto folds.
 
 ## Release Notes
-
-TODO
