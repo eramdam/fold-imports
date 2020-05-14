@@ -63,8 +63,10 @@ export function findImportsBlock(
   }
 
   // Find the first and the last line of imports.
-  const firstLine = matches[0].index;
-  const lastLine = matches[matches.length - 1].index;
+  const firstOffset = matches[0].index;
+  const firstLine = document.positionAt(firstOffset).line;
+  const lastOffset = matches[matches.length - 1].index;
+  const lastLine = document.positionAt(lastOffset).line;
 
   return {
     start: firstLine,
