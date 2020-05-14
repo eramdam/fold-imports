@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.1 - 2020-05-14
 
-- Fix a bug in the imports block detection so that it works properly when detecting import blocks that start after the first line of the document. (`7eff953`)
+- Fix a bug in the imports block detection so that it works properly when detecting import blocks that start after the first line of the document. (https://github.com/eramdam/fold-imports/commit/7b5ea459e088686acaaaeeff16505128777c9119)
 
 ## 1.0.0 - 2020-05-11
 
