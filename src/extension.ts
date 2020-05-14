@@ -18,14 +18,14 @@ export function activate(extensionContext: vscode.ExtensionContext) {
 
       const { document } = vscode.window.activeTextEditor;
       // Find the imports block.
-      const importBlock = findImportsBlock(document);
+      const importsBlock = findImportsBlock(document);
 
-      if (!importBlock) {
+      if (!importsBlock) {
         return;
       }
 
       // Trigger folding command.
-      changeFoldingOfImportLines(FoldActions.FOLD, importBlock);
+      changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
     }
   );
 
@@ -39,15 +39,15 @@ export function activate(extensionContext: vscode.ExtensionContext) {
 
       const { document } = vscode.window.activeTextEditor;
       // Find the imports block.
-      const importBlock = findImportsBlock(document);
+      const importsBlock = findImportsBlock(document);
 
       // No import block? Nothing to do.
-      if (!importBlock) {
+      if (!importsBlock) {
         return;
       }
 
       // Trigger folding command.
-      changeFoldingOfImportLines(FoldActions.UNFOLD, importBlock);
+      changeFoldingOfImportLines(FoldActions.UNFOLD, importsBlock);
     }
   );
 
