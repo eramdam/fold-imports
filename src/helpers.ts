@@ -75,16 +75,22 @@ export function findImportsBlock(
 }
 
 export function changeFoldingOfImportLines(
+  document: vscode.TextDocument,
   action: FoldActions,
   block: ImportsBlock
 ) {
-  const command = action === FoldActions.FOLD ? 'editor.fold' : 'editor.unfold';
-  logger(`Running ${command} at line ${block.start}`);
-  // Change folding at the line number.
-  vscode.commands.executeCommand(command, {
-    levels: 1,
-    selectionLines: [block.start],
-  });
+  setImmediate(() => {
+    const command = action === FoldActions.FOLD ? 'editor.fold' : 'editor.unfold';
+    if (vscode.window.activeTextEditor?.document !== document) {
+      return;
+    }
+    logger(`Running ${command} at line ${block.start}`);
+    // Change folding at the line number.
+    vscode.commands.executeCommand(command, {
+      levels: 1,
+      selectionLines: [block.start],
+    });
+  })
 }
 
 export function shouldAutoFoldImports(block: ImportsBlock | undefined) {

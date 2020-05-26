@@ -25,7 +25,7 @@ export function activate(extensionContext: vscode.ExtensionContext) {
       }
 
       // Trigger folding command.
-      changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
+      changeFoldingOfImportLines(document, FoldActions.FOLD, importsBlock);
     }
   );
 
@@ -47,7 +47,7 @@ export function activate(extensionContext: vscode.ExtensionContext) {
       }
 
       // Trigger folding command.
-      changeFoldingOfImportLines(FoldActions.UNFOLD, importsBlock);
+      changeFoldingOfImportLines(document, FoldActions.UNFOLD, importsBlock);
     }
   );
 
@@ -61,7 +61,7 @@ export function activate(extensionContext: vscode.ExtensionContext) {
       return;
     }
 
-    changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
+    changeFoldingOfImportLines(document, FoldActions.FOLD, importsBlock);
   });
 }
 
