@@ -5,6 +5,7 @@ import {
   FoldActions,
   shouldAutoFoldImports,
   extensionKey,
+  logger,
 } from './helpers';
 
 export function activate(extensionContext: vscode.ExtensionContext) {
@@ -55,6 +56,17 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   extensionContext.subscriptions.push(unfoldCommandDisposable);
 
   vscode.workspace.onDidOpenTextDocument((document) => {
+    const activeDocument = vscode.window.activeTextEditor?.document;
+
+    // If we have an active document and its document isn't the document we just opened, bail out.
+    if (
+      !!activeDocument &&
+      !document.fileName.includes(activeDocument.fileName)
+    ) {
+      logger('abort', activeDocument, document);
+      return;
+    }
+
     const importsBlock = findImportsBlock(document);
 
     if (!importsBlock || !shouldAutoFoldImports(importsBlock)) {
