@@ -40,9 +40,7 @@ export function getRegexpMatches(regexp: RegExp, text: string) {
 
 /** Logs to the console if debug mode is enabled. */
 export const logger = (...args: any[]) => {
-  if (getConfiguration().debug) {
-    console.log(...args);
-  }
+  console.log(...args);
 };
 
 /** Finds the import block in the document. */
@@ -51,6 +49,7 @@ export function findImportsBlock(
 ): ImportsBlock | undefined {
   // If the document doesn't have the languages we set up, nothing to do.
   if (!getImportLanguages().includes(document.languageId)) {
+    logger('[debug] findImportsBlock >', document.languageId, 'not supported');
     return undefined;
   }
 
@@ -59,6 +58,7 @@ export function findImportsBlock(
   // Find regex matches/
   const matches = getRegexpMatches(importsRE, text);
   if (matches.length < 1) {
+    logger('[debug] findImportsBlock >', 'No `import` tokens found');
     return undefined;
   }
 
@@ -87,24 +87,43 @@ export function changeFoldingOfImportLines(
   });
 }
 
-export function shouldAutoFoldImports(block: ImportsBlock | undefined) {
+type ShouldAutoFoldImportsResult =
+  | {
+      success: false;
+      reason: string;
+    }
+  | {
+      success: true;
+    };
+export function shouldAutoFoldImports(
+  block: ImportsBlock | undefined
+): boolean {
   // If we don't want to automatically fold imports, nothing to do.
   if (!getConfiguration().auto) {
+    logger('[debug] shouldAutoFoldImports >', 'Auto fold disabled');
     return false;
   }
 
   // If we have no lines, nothing to do.
   if (!block) {
+    logger('[debug] shouldAutoFoldImports >', 'No import blocks found');
     return false;
   }
 
   // If there is no import statement, nothing to do.
   if (block.start === -1) {
+    logger('[debug] shouldAutoFoldImports >', 'Imports block non-existant');
     return false;
   }
 
   // If the import block is smaller than the defined minimum size, nothing to do.
   if (block.size < getConfiguration().minimumBlockSize) {
+    logger(
+      '[debug] shouldAutoFoldImports >',
+      `Imports block size (${block.size}) smaller than minimum ${
+        getConfiguration().minimumBlockSize
+      }`
+    );
     return false;
   }
 
