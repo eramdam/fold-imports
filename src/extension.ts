@@ -7,6 +7,7 @@ import {
   extensionKey,
   logger,
 } from './helpers';
+import { nextTick } from 'process';
 
 export function activate(extensionContext: vscode.ExtensionContext) {
   const foldCommandDisposable = vscode.commands.registerCommand(
@@ -56,14 +57,16 @@ export function activate(extensionContext: vscode.ExtensionContext) {
   extensionContext.subscriptions.push(unfoldCommandDisposable);
 
   vscode.workspace.onDidOpenTextDocument((document) => {
-    const activeDocument = vscode.window.activeTextEditor?.document;
+    const activeDocument = vscode.window.visibleTextEditors.find((e) =>
+      e.document.fileName.includes(document.fileName)
+    )?.document;
 
     // If we have an active document and its document isn't the document we just opened, bail out.
     if (
-      !!activeDocument &&
+      activeDocument &&
       !document.fileName.includes(activeDocument.fileName)
     ) {
-      logger('abort', activeDocument, document);
+      logger('[abort]', activeDocument, document);
       return;
     }
 
@@ -73,7 +76,10 @@ export function activate(extensionContext: vscode.ExtensionContext) {
       return;
     }
 
-    changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
+    logger('[success] going to fold', document.fileName);
+    nextTick(() => {
+      changeFoldingOfImportLines(FoldActions.FOLD, importsBlock);
+    });
   });
 }
 
