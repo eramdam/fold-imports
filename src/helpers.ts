@@ -48,7 +48,12 @@ export function findImportsBlock(
   document: vscode.TextDocument
 ): ImportsBlock | undefined {
   // If the document doesn't have the languages we set up, nothing to do.
-  if (!getImportLanguages().includes(document.languageId)) {
+  // Note: VScode adds `.git` at the end of the filename for.. uh... i dont know?
+  // So we need to watch for that :(
+  if (
+    !getImportLanguages().includes(document.languageId) &&
+    !document.fileName.endsWith('.git')
+  ) {
     logger('[debug] findImportsBlock >', document.languageId, 'not supported');
     return undefined;
   }
