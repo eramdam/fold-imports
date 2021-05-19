@@ -14,17 +14,17 @@ https://marketplace.visualstudio.com/items?itemName=eramdam.fold-imports
 
 - Automatically folds ES6 imports in JavaScript and TypeScript files
 - Adds commands to fold and unfold imports of the current file, respectively
-  - `auto-fold-imports.fold`
-  - `auto-fold-imports.unfold`
+  - `fold-imports.fold`
+  - `fold-imports.unfold`
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-- `auto-fold-imports.auto`: Controls the automatic folding of imports.
-- `auto-fold-imports.debug`: Whether to print debug statements or not.
-- `auto-fold-imports.minimumBlockSize`: How big an imports block needs to be before it's auto folded.
-- `auto-fold-imports.extraLanguages`: Extra languages in which to auto folds.
+- `fold-imports.auto`: Controls the automatic folding of imports.
+- `fold-imports.debug`: Whether to print debug statements or not.
+- `fold-imports.minimumBlockSize`: How big an imports block needs to be before it's auto folded.
+- `fold-imports.extraLanguages`: Extra languages in which to auto folds.
 
 ## Release Notes
 
