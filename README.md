@@ -1,3 +1,6 @@
+VSCode now supports this natively, so you don't need this extension anymore 😅
+https://code.visualstudio.com/updates/v1_59#_automatically-fold-imports
+
 # Fold Imports
 
 Like the name implies, this extension automatically folds the ES6 imports of JavaScript and TypeScript files.
